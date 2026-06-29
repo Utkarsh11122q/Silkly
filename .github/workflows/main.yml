@@ -5,6 +5,10 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+defaults:
+  run:
+    working-directory: silkly
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -42,5 +46,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: silkly-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          path: silkly/android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
