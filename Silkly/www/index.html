@@ -23,7 +23,7 @@
   --text:#1A1A1C;--sub:#7A7A80;--dim:#C9C7C0;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden;transition:background .4s,color .4s}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow:hidden;transition:background .4s,color .4s;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 a{color:var(--accent);text-decoration:none}
 
 /* ───────────── SPLASH — market zoom intro ───────────── */
@@ -68,6 +68,13 @@ a{color:var(--accent);text-decoration:none}
 .cta:active{opacity:.85}.cta:disabled{opacity:.5}
 .err{font-size:12.5px;color:var(--down);min-height:18px;margin-top:10px;line-height:1.5}
 .fine{font-size:11px;color:var(--sub);text-align:center;margin-top:16px;line-height:1.6}
+.pend-icon{font-size:48px;margin-bottom:16px}
+.pend-check{width:100%;background:var(--s2);border:1px solid var(--line);border-radius:13px;padding:14px;font-size:14px;font-weight:600;color:var(--text);cursor:pointer;font-family:inherit;margin-top:4px}
+.pend-check:active{opacity:.8}
+.fld-wrap{position:relative;margin-bottom:11px}
+.fld-wrap .fld{margin-bottom:0;padding-right:46px;width:100%}
+.eye-btn{position:absolute;right:13px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--sub);cursor:pointer;padding:4px;line-height:0;display:flex;align-items:center}
+.eye-btn svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 /* major picker */
 .majors{display:flex;flex-direction:column;gap:11px;margin-bottom:6px}
 .major{display:flex;align-items:center;gap:14px;background:var(--s1);border:1.5px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:border-color .18s,background .18s}
@@ -75,6 +82,19 @@ a{color:var(--accent);text-decoration:none}
 .major .ic{width:44px;height:44px;border-radius:12px;background:var(--s2);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
 .major .mt{font-size:15px;font-weight:700}
 .major .md{font-size:11.5px;color:var(--sub);margin-top:2px;line-height:1.4}
+/* multi-select checkmark */
+.major{position:relative}
+.ind-chk{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--dim);flex-shrink:0;margin-left:auto;transition:all .18s;display:flex;align-items:center;justify-content:center;font-size:11px;color:transparent}
+.major.sel .ind-chk{background:var(--accent);border-color:var(--accent);color:#0B0B0C}
+/* theme picker */
+.theme-opts{display:flex;gap:10px;margin-bottom:8px}
+.theme-opt{flex:1;border-radius:16px;padding:14px;border:2px solid var(--line);cursor:pointer;transition:border-color .18s,background .18s}
+.theme-opt.sel{border-color:var(--accent);background:rgba(201,160,99,.06)}
+.theme-preview{height:58px;border-radius:10px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-size:28px}
+.theme-preview.dp{background:#141415}
+.theme-preview.lp{background:#F0EEE9}
+.theme-opt-lbl{font-size:13px;font-weight:700;text-align:center}
+.theme-opt-sub{font-size:11px;color:var(--sub);text-align:center;margin-top:2px}
 
 /* ───────────── APP SHELL ───────────── */
 #app{height:100%;display:none;flex-direction:column}
@@ -90,8 +110,8 @@ a{color:var(--accent);text-decoration:none}
 .gear svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7}
 
 .scroll{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;padding-bottom:calc(70px + var(--safe-b))}
-.pane{display:none}.pane.on{display:block;animation:fu .25s ease}
-@keyframes fu{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.pane{display:none}.pane.on{display:block;animation:paneIn .28s cubic-bezier(.4,0,.2,1)}
+@keyframes paneIn{from{opacity:0;filter:blur(6px);transform:translateY(3px)}to{opacity:1;filter:blur(0px);transform:none}}
 ::-webkit-scrollbar{width:0}
 
 .nav{position:fixed;bottom:0;left:0;right:0;padding:8px 0 calc(var(--safe-b)+6px);background:var(--bg);backdrop-filter:blur(22px);border-top:1px solid var(--line2);display:flex;justify-content:space-around;z-index:200}
@@ -179,6 +199,23 @@ a{color:var(--accent);text-decoration:none}
 .ri-cat{font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;background:var(--s2);color:var(--sub)}
 .ri-del{background:none;border:none;color:var(--dim);font-size:17px;cursor:pointer;padding:2px 4px;margin-left:4px}
 
+/* ── Day tab: iPhone Clock style ── */
+.day-clock-wrap{text-align:center;padding:36px 20px 26px;border-bottom:1px solid var(--line2)}
+.day-clk-time{font-size:68px;font-weight:200;letter-spacing:-2px;color:var(--text);line-height:1;font-variant-numeric:tabular-nums}
+.day-clk-period{font-size:26px;font-weight:300;color:var(--sub);vertical-align:super;margin-left:3px}
+.day-clk-date{font-size:13px;color:var(--sub);margin-top:8px;letter-spacing:.3px}
+.day-nextup{margin:12px 16px;background:rgba(201,160,99,.08);border:1px solid rgba(201,160,99,.22);border-radius:16px;padding:14px 16px;display:none;align-items:center;gap:12px}
+.day-nu-ico{font-size:26px;line-height:1}
+.day-nu-lbl{font-size:9.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
+.day-nu-title{font-size:15px;font-weight:600}
+.day-nu-time{font-size:12px;color:var(--sub);margin-top:2px}
+.day-add-wrap{margin:10px 16px 0;background:var(--s1);border:1px solid var(--line);border-radius:16px;padding:15px 16px}
+.day-add-row{display:flex;align-items:center;gap:10px}
+.day-add-in{flex:1;background:transparent;border:none;color:var(--text);font-size:15px;font-family:inherit;outline:none}
+.day-add-in::placeholder{color:var(--sub)}
+.day-add-time{background:none;border:none;color:var(--accent);font-family:inherit;font-size:14px;font-weight:600;outline:none;cursor:pointer}
+.day-add-btn{background:var(--accent);border:none;border-radius:10px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:#0B0B0C;cursor:pointer;flex-shrink:0}
+
 .sig-wrap{padding:14px 16px 0}
 .sig-intro{font-size:12px;color:var(--sub);line-height:1.7;margin-bottom:14px;padding-left:12px;border-left:2px solid var(--line)}
 .sig-card{background:var(--s1);border:1px solid var(--line2);border-radius:16px;padding:16px;margin-bottom:10px}
@@ -264,11 +301,44 @@ a{color:var(--accent);text-decoration:none}
     <div id="v-login">
       <div class="eyebrow">Welcome</div>
       <div class="headline">Sign in</div>
-      <div class="lede">Use the email and temporary password you were given. You stay signed in for a week of use.</div>
+      <div class="lede">Sign in to your Silkly account.</div>
       <input class="fld" id="liEmail" type="email" placeholder="you@email.com" autocomplete="username" autocapitalize="none" spellcheck="false"/>
-      <input class="fld" id="liPass" type="password" placeholder="Password" autocomplete="current-password"/>
+      <div class="fld-wrap">
+        <input class="fld" id="liPass" type="password" placeholder="Password" autocomplete="current-password"/>
+        <button class="eye-btn" type="button" data-for="liPass" aria-label="Show password"></button>
+      </div>
       <button class="cta" id="liBtn">Sign in</button>
       <div class="err" id="liErr"></div>
+      <div class="fine">No account? <a href="#" id="toSignup">Create one</a></div>
+    </div>
+
+    <!-- view: PENDING APPROVAL -->
+    <div id="v-pending" style="display:none">
+      <div class="pend-icon">⏳</div>
+      <div class="eyebrow">Almost there</div>
+      <div class="headline">Pending approval</div>
+      <div class="lede">Your account is under review. You'll get an email at <strong id="pendEmail"></strong> once it's been approved — usually within a few hours.</div>
+      <button class="cta" id="pendingCheckBtn">Check status</button>
+      <button class="pend-check" id="pendingLogoutBtn">Sign out</button>
+    </div>
+
+    <!-- view: SIGN UP -->
+    <div id="v-signup" style="display:none">
+      <div class="eyebrow">New account</div>
+      <div class="headline">Create your account</div>
+      <div class="lede">Enter your email and choose a password to get started.</div>
+      <input class="fld" id="suEmail" type="email" placeholder="you@email.com" autocomplete="username" autocapitalize="none" spellcheck="false"/>
+      <div class="fld-wrap">
+        <input class="fld" id="suPass" type="password" placeholder="Password (min 8 characters)" autocomplete="new-password"/>
+        <button class="eye-btn" type="button" data-for="suPass" aria-label="Show password"></button>
+      </div>
+      <div class="fld-wrap">
+        <input class="fld" id="suPass2" type="password" placeholder="Confirm password" autocomplete="new-password"/>
+        <button class="eye-btn" type="button" data-for="suPass2" aria-label="Show password"></button>
+      </div>
+      <button class="cta" id="suBtn">Create account</button>
+      <div class="err" id="suErr"></div>
+      <div class="fine">Already have an account? <a href="#" id="toLogin">Sign in</a></div>
     </div>
 
     <!-- view: SET NEW PASSWORD (first login) -->
@@ -276,17 +346,43 @@ a{color:var(--accent);text-decoration:none}
       <div class="eyebrow">First sign in</div>
       <div class="headline">Set your password</div>
       <div class="lede">Choose a password only you know. You'll use this from now on.</div>
-      <input class="fld" id="npPass" type="password" placeholder="New password (min 8 characters)" autocomplete="new-password"/>
-      <input class="fld" id="npPass2" type="password" placeholder="Confirm new password" autocomplete="new-password"/>
+      <div class="fld-wrap">
+        <input class="fld" id="npPass" type="password" placeholder="New password (min 8 characters)" autocomplete="new-password"/>
+        <button class="eye-btn" type="button" data-for="npPass" aria-label="Show password"></button>
+      </div>
+      <div class="fld-wrap">
+        <input class="fld" id="npPass2" type="password" placeholder="Confirm new password" autocomplete="new-password"/>
+        <button class="eye-btn" type="button" data-for="npPass2" aria-label="Show password"></button>
+      </div>
       <button class="cta" id="npBtn">Save password</button>
       <div class="err" id="npErr"></div>
     </div>
 
-    <!-- view: ONBOARDING (pick major) -->
+    <!-- view: PICK THEME -->
+    <div id="v-theme" style="display:none">
+      <div class="eyebrow">Appearance</div>
+      <div class="headline">How should it look?</div>
+      <div class="lede">Choose a theme. You can change this anytime in settings.</div>
+      <div class="theme-opts" id="themeOpts">
+        <div class="theme-opt sel" data-t="dark">
+          <div class="theme-preview dp">🌙</div>
+          <div class="theme-opt-lbl">Dark</div>
+          <div class="theme-opt-sub">Easy on the eyes</div>
+        </div>
+        <div class="theme-opt" data-t="light">
+          <div class="theme-preview lp">☀️</div>
+          <div class="theme-opt-lbl">Light</div>
+          <div class="theme-opt-sub">Clean & bright</div>
+        </div>
+      </div>
+      <button class="cta" id="themeBtn">Continue</button>
+    </div>
+
+    <!-- view: ONBOARDING (pick industries) -->
     <div id="v-major" style="display:none">
       <div class="eyebrow">Personalise</div>
-      <div class="headline">Pick your field</div>
-      <div class="lede">Your daily brief, feed and signal are built around this. You can change it anytime in settings.</div>
+      <div class="headline">What do you follow?</div>
+      <div class="lede">Pick the industries you want Silkly to cover. Select as many as you like.</div>
       <div class="majors" id="majorPick"></div>
       <button class="cta" id="mjBtn" disabled>Build my feed</button>
       <div class="err" id="mjErr"></div>
@@ -357,13 +453,20 @@ a{color:var(--accent);text-decoration:none}
 
     <!-- DAY -->
     <div class="pane" id="pane-day">
-      <div class="rem-add">
-        <input class="rem-in" id="rIn" placeholder="Meeting, task, call…" type="text"/>
-        <div class="rem-div"></div>
-        <div class="rem-trow"><span class="rem-tlbl">Time</span><input class="rem-tval" id="rTime" type="time" value="09:30"/></div>
-        <button class="rem-abtn" id="addRemBtn">+ Add reminder</button>
+      <div class="day-clock-wrap">
+        <div class="day-clk-time" id="dayClkTime"></div>
+        <div class="day-clk-date" id="dayClkDate"></div>
       </div>
+      <div class="day-nextup" id="dayNextUp"></div>
+      <div class="sec-lbl" style="padding-top:16px;padding-bottom:6px">Schedule</div>
       <div class="rem-list" id="remList"></div>
+      <div class="day-add-wrap">
+        <div class="day-add-row">
+          <input class="day-add-in" id="rIn" placeholder="Meeting, task, call…" type="text"/>
+          <input class="day-add-time" id="rTime" type="time" value="09:30"/>
+          <button class="day-add-btn" id="addRemBtn">+</button>
+        </div>
+      </div>
     </div>
 
     <!-- SIGNAL -->
@@ -449,13 +552,52 @@ var MAJORS = {
   }
 };
 
+var INDUSTRIES = [
+  {k:'finance',  emoji:'📈', label:'Finance',     desc:'Markets, macro & investing'},
+  {k:'medical',  emoji:'🩺', label:'Medicine',    desc:'Clinical research & health'},
+  {k:'engineering',emoji:'⚙️',label:'Engineering',desc:'Software, hardware & systems'},
+  {k:'ai',       emoji:'🤖', label:'AI & ML',     desc:'Machine learning & research'},
+  {k:'crypto',   emoji:'🪙', label:'Crypto',      desc:'Web3, DeFi & digital assets'},
+  {k:'climate',  emoji:'🌿', label:'Climate',     desc:'Energy & sustainability'},
+  {k:'startups', emoji:'🚀', label:'Startups',    desc:'VC, funding & founders'},
+  {k:'policy',   emoji:'⚖️', label:'Policy',      desc:'Regulation & geopolitics'}
+];
+var IND_MAJOR = {finance:'finance',medical:'medical',engineering:'engineering',ai:'engineering',crypto:'finance',climate:'engineering',startups:'finance',policy:'finance'};
+var IND_FOCUS = {
+  finance:'global markets, equities, macroeconomics, central banks, commodities, corporate earnings and deals',
+  medical:'clinical medicine, peer-reviewed research, drug trials, FDA/EMA approvals, public health, diagnostics and medical devices',
+  engineering:'software engineering, hardware, semiconductors, robotics, energy systems, aerospace and technical releases',
+  ai:'artificial intelligence, large language models, AI research, model releases, AI safety, ML applications and foundation models',
+  crypto:'cryptocurrency, Bitcoin, Ethereum, DeFi, NFTs, Web3, blockchain technology, digital assets and crypto regulation',
+  climate:'climate change, renewable energy, ESG investing, carbon markets, clean technology, sustainability and energy policy',
+  startups:'startups, venture capital, funding rounds, unicorn companies, product launches, IPOs and entrepreneurship',
+  policy:'government policy, regulation, geopolitics, law, tech policy, financial regulation and international affairs'
+};
+
 /* ── STATE ── */
 var ME=null, MAJOR=null, ACCENT="#C9A063", DATA=null, ttsOn=false, nFilter="All", rid=6;
-var REMS = loadRems();
+var REMS = loadRems(), selectedIndustries=[];
+var _hdrIval=null, _refIval=null;
 
 /* ── DOM helpers ── */
 function el(id){return document.getElementById(id);}
-function show(v){["v-login","v-pass","v-major"].forEach(function(x){el(x).style.display = (x===v?"block":"none");});}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function show(v){["v-login","v-signup","v-pending","v-pass","v-theme","v-major"].forEach(function(x){el(x).style.display=(x===v?"block":"none");});}
+
+/* ── password show/hide ── */
+var EYE_ON='<svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+var EYE_OFF='<svg viewBox="0 0 24 24"><path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19m-6.72-1.07a3 3 0 11-4.24-4.24M1 1l22 22"/></svg>';
+function initEyeBtns(){
+  Array.prototype.forEach.call(document.querySelectorAll('.eye-btn'),function(btn){
+    btn.innerHTML=EYE_ON;
+    btn.onclick=function(){
+      var inp=el(btn.getAttribute('data-for')); if(!inp) return;
+      var show=inp.type==='password'; inp.type=show?'text':'password';
+      btn.innerHTML=show?EYE_OFF:EYE_ON;
+    };
+  });
+}
+window.addEventListener('load',function(){ initEyeBtns(); });
 var DAYS=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 var MONS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 function greet(){var h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening';}
@@ -468,38 +610,119 @@ function applyTheme(t){document.documentElement.setAttribute('data-theme',t==='l
    ============================================================ */
 try{applyTheme(localStorage.getItem('theme')||'dark');}catch(e){}
 
+function finishBoot(){
+  el('splash').style.display='none';
+  route();
+  // safety net: if neither gate nor app appeared after 6s, show login
+  setTimeout(function(){
+    if(!el('gate').classList.contains('on') && !el('app').classList.contains('on')){
+      openGate('v-login','Connection timed out — check your internet and try again.');
+    }
+  }, 6000);
+}
+
 window.addEventListener('load',function(){
   initHdr();
+  var seenSplash;
+  try{ seenSplash = localStorage.getItem('splashSeen'); }catch(e){}
+
+  if(seenSplash){
+    // Not a fresh cold start (e.g. WebView reload while backgrounded/foregrounded) —
+    // skip the ~4s animated intro so it doesn't replay every time the app is reopened.
+    el('splash').classList.add('out');
+    setTimeout(finishBoot, 250);
+    return;
+  }
+
+  buildCandles();
   setTimeout(function(){
     el('splash').classList.add('out');
-    setTimeout(function(){ el('splash').style.display='none'; route(); }, 800);
+    setTimeout(function(){
+      try{ localStorage.setItem('splashSeen','1'); }catch(e){}
+      finishBoot();
+    }, 800);
   }, 2700);
 });
 
+function buildCandles(){
+  var g=document.getElementById('candles'); if(!g) return;
+  var data=[[40,70],[60,90],[80,55],[50,85],[70,100],[90,65],[55,95],[75,110],[100,70],[85,115],[65,90],[95,60],[80,105],[110,75],[90,120]];
+  data.forEach(function(d,i){
+    var x=18+i*34, o=250-d[0], c=250-d[1], up=c<o;
+    var top=Math.min(o,c), h=Math.abs(c-o)||2, wick=h+12;
+    var r=document.createElementNS('http://www.w3.org/2000/svg','rect');
+    r.setAttribute('x',x-5); r.setAttribute('y',top); r.setAttribute('width',10); r.setAttribute('height',h);
+    r.setAttribute('rx','2'); r.setAttribute('fill',up?'#5FA98A':'#C97B6E');
+    r.classList.add('cndl'); r.style.animationDelay=(i*0.06)+'s';
+    var l=document.createElementNS('http://www.w3.org/2000/svg','line');
+    l.setAttribute('x1',x); l.setAttribute('x2',x); l.setAttribute('y1',top-6); l.setAttribute('y2',top+h+6);
+    l.setAttribute('stroke',up?'#5FA98A':'#C97B6E'); l.setAttribute('stroke-width','1.5');
+    l.classList.add('cndl'); l.style.animationDelay=(i*0.06)+'s';
+    g.appendChild(l); g.appendChild(r);
+  });
+}
+
 async function route(){
-  var { data:{ session } } = await sb.auth.getSession();
-  if(!session){ openGate('v-login'); return; }
+  try{
+    var { data:{ session } } = await sb.auth.getSession();
+    if(!session){ openGate('v-login'); return; }
 
-  // load profile
-  var prof = await getProfile(session.user.id);
-  if(!prof){ await sb.auth.signOut(); openGate('v-login'); return; }
+    // getUser() hits the server — guaranteed fresh metadata (getSession() returns cached JWT)
+    var { data: ud } = await sb.auth.getUser();
+    var meta = (ud&&ud.user&&ud.user.user_metadata) || (session.user.user_metadata||{});
+    var userEmail = (ud&&ud.user&&ud.user.email) || session.user.email || '';
+    var status = meta.approval_status;
 
-  // 7-day inactivity logout
-  var last = new Date(prof.last_active_at||0).getTime();
-  if(Date.now()-last > 7*24*60*60*1000){ await sb.auth.signOut(); openGate('v-login', "You were signed out after a week away. Sign in to continue."); return; }
+    if(status==='pending'){
+      el('gate').classList.add('on'); show('v-pending');
+      if(el('pendEmail')) el('pendEmail').textContent = userEmail;
+      return;
+    }
+    if(status==='denied'){
+      openGate('v-login','Your account application was not approved.');
+      return;
+    }
 
-  ME = { id:session.user.id, email:session.user.email, prof:prof };
-  applyTheme(prof.theme||'dark');
+    // Load profile
+    var prof = await getProfile(session.user.id);
+    if(!prof){
+      // No profile yet (e.g. confirmed email externally) — create it and hold for approval
+      var cpRes = await fetch(FN_URL+'/create-profile', {
+        method:'POST',
+        headers:{ 'Authorization':'Bearer '+session.access_token }
+      });
+      if(!cpRes.ok){ await sb.auth.signOut(); openGate('v-login','Account setup failed. Please sign up again.'); return; }
+      el('gate').classList.add('on'); show('v-pending');
+      if(el('pendEmail')) el('pendEmail').textContent = userEmail;
+      return;
+    }
 
-  if(prof.must_change_password){ openGate('v-pass'); return; }
-  if(!prof.major){ openGate('v-major'); return; }
+    // 7-day inactivity logout
+    var last = new Date(prof.last_active_at||0).getTime();
+    if(Date.now()-last > 7*24*60*60*1000){
+      await sb.auth.signOut();
+      openGate('v-login','You were signed out after a week away. Sign in to continue.');
+      return;
+    }
 
-  await touchActive();
-  enterApp(prof.major);
+    ME = { id:session.user.id, email:session.user.email, prof:prof };
+    el('wm').textContent = prof.username || 'Silkly';
+    applyTheme(prof.theme||'dark');
+
+    if(prof.must_change_password){ openGate('v-pass'); return; }
+    if(!prof.major){ openGate('v-theme'); return; }
+
+    await touchActive();
+    closeGate();
+    enterApp(prof.major);
+  }catch(e){
+    openGate('v-login','Connection error — check your internet and try again.');
+  }
 }
 
 function openGate(view, msg){
   el('gate').classList.add('on'); show(view);
+  if(view==='v-theme') initThemeOpts();
   if(view==='v-major') buildMajorPick();
   if(msg) el('liErr').textContent = msg;
 }
@@ -525,9 +748,44 @@ el('liBtn').onclick = async function(){
   var { data, error } = await sb.auth.signInWithPassword({ email:email, password:pass });
   this.disabled=false; this.textContent='Sign in';
   if(error){ el('liErr').textContent = friendly(error.message); return; }
-  // log a login event (best-effort)
   sb.from('usage_events').insert({ user_id:data.user.id, event_type:'login' });
   route();
+};
+el('toSignup').onclick=function(e){ e.preventDefault(); el('suEmail').value=el('liEmail').value||''; show('v-signup'); el('suErr').textContent=''; };
+el('toLogin').onclick=function(e){ e.preventDefault(); show('v-login'); el('liErr').textContent=''; };
+el('pendingCheckBtn').onclick=async function(){
+  this.disabled=true; this.textContent='Checking…';
+  var { data } = await sb.auth.refreshSession();
+  this.disabled=false; this.textContent='Check status';
+  var status = data&&data.user&&data.user.user_metadata&&data.user.user_metadata.approval_status;
+  if(status==='approved'){ closeGate(); route(); }
+  else if(status==='denied'){ await sb.auth.signOut(); openGate('v-login','Your account application was not approved.'); }
+  else { showToast('Still pending','Check back soon or wait for your email.'); }
+};
+el('pendingLogoutBtn').onclick=async function(){ await sb.auth.signOut(); openGate('v-login'); };
+
+/* ============================================================
+   SIGN UP
+   ============================================================ */
+el('suBtn').onclick = async function(){
+  var email=(el('suEmail').value||'').trim(), p1=el('suPass').value||'', p2=el('suPass2').value||'';
+  el('suErr').textContent='';
+  if(!email){ el('suErr').textContent='Enter your email.'; return; }
+  if(p1.length<8){ el('suErr').textContent='Password must be at least 8 characters.'; return; }
+  if(p1!==p2){ el('suErr').textContent='Passwords don\'t match.'; return; }
+  this.disabled=true; this.textContent='Creating account…';
+  var { data, error } = await sb.auth.signUp({ email:email, password:p1 });
+  if(error){ this.disabled=false; this.textContent='Create account'; el('suErr').textContent=friendly(error.message); return; }
+  if(!data.session){ this.disabled=false; this.textContent='Create account'; el('suErr').textContent='Check your email to confirm your account, then sign in.'; return; }
+  // create profile row via edge function (bypasses RLS)
+  var cpRes = await fetch(FN_URL+'/create-profile', {
+    method:'POST',
+    headers:{ 'Authorization':'Bearer '+data.session.access_token }
+  });
+  if(!cpRes.ok){ this.disabled=false; this.textContent='Create account'; el('suErr').textContent='Account created but profile setup failed — try signing in.'; return; }
+  this.disabled=false; this.textContent='Create account';
+  if(el('pendEmail')) el('pendEmail').textContent=data.user.email||'';
+  show('v-pending');
 };
 
 /* ============================================================
@@ -544,33 +802,59 @@ el('npBtn').onclick = async function(){
   await sb.from('profiles').update({ must_change_password:false }).eq('id',ME.id);
   this.disabled=false; this.textContent='Save password';
   ME.prof.must_change_password=false;
-  if(!ME.prof.major){ show('v-major'); buildMajorPick(); } else { closeGate(); enterApp(ME.prof.major); }
+  if(!ME.prof.major){ show('v-theme'); initThemeOpts(); } else { closeGate(); enterApp(ME.prof.major); }
 };
 
 /* ============================================================
-   ONBOARDING — pick major
+   ONBOARDING — theme picker
    ============================================================ */
-var pickedMajor=null;
+function initThemeOpts(){
+  var cur = document.documentElement.getAttribute('data-theme')||'dark';
+  Array.prototype.forEach.call(el('themeOpts').querySelectorAll('.theme-opt'),function(node){
+    node.classList.toggle('sel', node.getAttribute('data-t')===cur);
+    node.onclick=function(){
+      Array.prototype.forEach.call(el('themeOpts').querySelectorAll('.theme-opt'),function(n){n.classList.remove('sel');});
+      node.classList.add('sel');
+      applyTheme(node.getAttribute('data-t'));
+    };
+  });
+}
+el('themeBtn').onclick = async function(){
+  var picked=el('themeOpts').querySelector('.theme-opt.sel');
+  var t=picked?picked.getAttribute('data-t'):'dark';
+  applyTheme(t);
+  if(ME) await sb.from('profiles').update({theme:t}).eq('id',ME.id);
+  show('v-major'); buildMajorPick();
+};
+
+/* ============================================================
+   ONBOARDING — pick industries (multi-select)
+   ============================================================ */
 function buildMajorPick(){
-  el('majorPick').innerHTML = Object.keys(MAJORS).map(function(k){
-    var m=MAJORS[k];
-    return '<div class="major" data-m="'+k+'"><div class="ic">'+m.emoji+'</div>'+
-      '<div><div class="mt">'+m.label+'</div><div class="md">'+m.blurb+'</div></div></div>';
+  selectedIndustries=[];
+  el('majorPick').innerHTML = INDUSTRIES.map(function(ind){
+    return '<div class="major" data-m="'+ind.k+'">'+
+      '<div class="ic">'+ind.emoji+'</div>'+
+      '<div><div class="mt">'+ind.label+'</div><div class="md">'+ind.desc+'</div></div>'+
+      '<div class="ind-chk">✓</div></div>';
   }).join('');
   Array.prototype.forEach.call(el('majorPick').querySelectorAll('.major'),function(node){
     node.onclick=function(){
-      pickedMajor=node.getAttribute('data-m');
-      Array.prototype.forEach.call(el('majorPick').querySelectorAll('.major'),function(n){n.classList.remove('sel');});
-      node.classList.add('sel'); el('mjBtn').disabled=false;
+      var k=node.getAttribute('data-m'), idx=selectedIndustries.indexOf(k);
+      if(idx>-1){ selectedIndustries.splice(idx,1); node.classList.remove('sel'); }
+      else { selectedIndustries.push(k); node.classList.add('sel'); }
+      el('mjBtn').disabled=selectedIndustries.length===0;
     };
   });
 }
 el('mjBtn').onclick = async function(){
-  if(!pickedMajor) return;
+  if(!selectedIndustries.length) return;
   this.disabled=true; this.textContent='Building…';
-  await sb.from('profiles').update({ major:pickedMajor }).eq('id',ME.id);
-  ME.prof.major=pickedMajor;
-  closeGate(); enterApp(pickedMajor);
+  var primaryKey=IND_MAJOR[selectedIndustries[0]]||'finance';
+  saveInterests(selectedIndustries);
+  await sb.from('profiles').update({ major:primaryKey }).eq('id',ME.id);
+  ME.prof.major=primaryKey;
+  closeGate(); enterApp(primaryKey);
 };
 
 /* ============================================================
@@ -584,8 +868,38 @@ function enterApp(major){
   el('storiesLbl').textContent = 'Top stories · '+MAJOR.label;
   initHdr();
   renderRems(); REMS.forEach(schedRem);
+
+  var cached = loadCache(major);
+  if(cached){ DATA = cached.data; paint(cached.ts); }
+  else { loadAI(); }
+
+  maybeAutoRefresh(major);
+  if(_hdrIval) clearInterval(_hdrIval);
+  if(_refIval) clearInterval(_refIval);
+  _hdrIval = setInterval(initHdr,60000);
+  _refIval = setInterval(function(){ maybeAutoRefresh(major); }, 10*60*1000);
+}
+
+/* ── local cache (avoids an AI call on every app open) ── */
+function cacheKey(majorKey){ return 'silkly_cache_'+majorKey; }
+function loadCache(majorKey){
+  try{ var c=JSON.parse(localStorage.getItem(cacheKey(majorKey))); if(c&&c.data&&c.ts) return c; }catch(e){}
+  return null;
+}
+function saveCache(majorKey,data){
+  try{ localStorage.setItem(cacheKey(majorKey), JSON.stringify({data:data,ts:Date.now()})); }catch(e){}
+}
+/* once a day at 6am, refresh automatically only if the cache is more than 6h stale */
+function maybeAutoRefresh(majorKey){
+  var now=new Date();
+  if(now.getHours()!==6) return;
+  var cached=loadCache(majorKey);
+  var last=cached?cached.ts:0;
+  if(Date.now()-last <= 6*60*60*1000) return;
+  var flagKey='silkly_autoref_'+majorKey, todayStr=now.toDateString();
+  if(localStorage.getItem(flagKey)===todayStr) return;
+  localStorage.setItem(flagKey,todayStr);
   loadAI();
-  setInterval(initHdr,60000);
 }
 
 function buildNav(){
@@ -627,26 +941,56 @@ function initHdr(){
   if(el('greetTxt')) el('greetTxt').textContent=greet();
   if(el('hdrTime')) el('hdrTime').textContent=fmtTime(n);
   if(el('hdrDate')) el('hdrDate').textContent=DAYS[n.getDay()]+', '+MONS[n.getMonth()]+' '+n.getDate();
+  var h=n.getHours(), m=n.getMinutes(), ampm=h>=12?'PM':'AM', h12=h%12||12, mm=m<10?'0'+m:m;
+  if(el('dayClkTime')) el('dayClkTime').innerHTML=h12+':'+mm+'<span class="day-clk-period">'+ampm+'</span>';
+  if(el('dayClkDate')) el('dayClkDate').textContent=DAYS[n.getDay()]+', '+MONS[n.getMonth()]+' '+n.getDate();
+  updateNextUp();
+}
+function updateNextUp(){
+  var card=el('dayNextUp'); if(!card) return;
+  var now=new Date();
+  var upcoming=REMS.filter(function(r){
+    if(r.done) return false;
+    var p=r.time.split(':');
+    return new Date(now.getFullYear(),now.getMonth(),now.getDate(),+p[0],+p[1],0)>now;
+  }).sort(function(a,b){return a.time.localeCompare(b.time);});
+  if(!upcoming.length){ card.style.display='none'; return; }
+  var nx=upcoming[0], p=nx.time.split(':');
+  var fire=new Date(now.getFullYear(),now.getMonth(),now.getDate(),+p[0],+p[1],0);
+  var mins=Math.round((fire-now)/60000);
+  var cd=mins<60?'in '+mins+'m':'in '+Math.floor(mins/60)+'h '+(mins%60)+'m';
+  card.style.display='flex';
+  card.innerHTML='<div class="day-nu-ico">⏰</div><div><div class="day-nu-lbl">Next Up</div>'+
+    '<div class="day-nu-title">'+esc(nx.title)+'</div>'+
+    '<div class="day-nu-time">'+nx.time+' · '+cd+'</div></div>';
 }
 
 /* ============================================================
    AI — calls the ai-proxy edge function (secret key stays server-side)
    ============================================================ */
+function interestLabels(){
+  var ids=loadInterests(); if(!ids.length) return MAJOR.label;
+  return ids.map(function(k){var i=INDUSTRIES.filter(function(x){return x.k===k;})[0]; return i?i.label:k;}).join(', ');
+}
+function interestFocus(){
+  var ids=loadInterests(); if(!ids.length) return MAJOR.focus;
+  return ids.map(function(k){return IND_FOCUS[k]||'';}).filter(Boolean).join('; ');
+}
 function buildPrompt(){
   var date=new Date().toDateString();
-  return 'You are Silkly, a daily intelligence engine for a professional whose field is '+MAJOR.label+'. '+
-  'Focus every piece of content on: '+MAJOR.focus+'. Date: '+date+'. '+
+  return 'You are Silkly, a daily intelligence engine for a professional whose interests cover: '+interestLabels()+'. '+
+  'Focus every piece of content on: '+interestFocus()+'. Date: '+date+'. '+
   'Return ONLY valid JSON — no markdown, no backticks, no preamble. Exactly these keys: '+
-  'brief (string, 4 dense executive sentences: most consequential development, key risk, strongest positive signal, one specific action for this person); '+
-  'domread (string, 2 sentences giving the current state of the field and what to watch); '+
-  'stories (array of 8 objects, keys headline/summary/source/cat/time — cat must be one of '+JSON.stringify(MAJOR.chips.slice(1))+', time like "2h ago"); '+
-  'feed (array of 8 objects, keys headline/summary/source/tag/time — a broader mix within the field); '+
-  'cards (array of up to 4 objects, keys title and items, where items is an array of up to 4 objects with keys s (short symbol/label), n (full name), p (a representative current numeric value), pc (percent change today, number, may be negative) — pick the most relevant indicators, metrics, indices or instruments for the '+MAJOR.label+' field); '+
-  'signal (object: ideaTitle, ideaBody, radar [array of 3 strings], moveTitle, moveBody, word, wordDef, quote, quoteAttr). '+
-  'Use your best current knowledge; approximate values are fine.';
+  'brief (string, 5 dense executive sentences: most consequential overnight development with specific names/numbers, the key macro risk to watch, the strongest positive signal, one specific tactical action for this person today, and one longer-horizon opportunity); '+
+  'domread (string, 3 sentences: current state of the field today, what top practitioners are watching right now, and one specific data point or number that matters); '+
+  'stories (array of 10 objects, keys headline/summary/source/cat/time — cat must be one of '+JSON.stringify(MAJOR.chips.slice(1))+', time like "2h ago", summary must be 2 full sentences with specific details and numbers); '+
+  'feed (array of 10 objects, keys headline/summary/source/tag/time — a broader mix within the field, summaries should be substantive 2-sentence explanations); '+
+  'cards (array of up to 4 objects, keys title and items, where items is an array of up to 5 objects with keys s (short symbol/label), n (full name), p (a representative current numeric value), pc (percent change today, number, may be negative) — pick the most relevant indicators, metrics, indices or instruments for the '+MAJOR.label+' field); '+
+  'signal (object: ideaTitle, ideaBody [3 sentences with specifics], radar [array of 4 strings — each a concrete observation, not a vague platitude], moveTitle, moveBody [2 sentences], word, wordDef [full definition plus a sentence of professional context], quote, quoteAttr). '+
+  'Be specific with names, numbers, companies, and dates everywhere. Approximate values are fine but avoid vague generalities.';
 }
 
-async function loadAI(){
+async function loadAI(manual){
   var { data:{ session } } = await sb.auth.getSession();
   if(!session){ openGate('v-login'); return; }
   try{
@@ -659,17 +1003,32 @@ async function loadAI(){
     if(out.error){ throw new Error(out.error); }
     var cleaned=(out.text||'{}').replace(/```json/g,'').replace(/```/g,'').trim();
     DATA=JSON.parse(cleaned);
+    saveCache(ME.prof.major, DATA);
     paint();
     touchActive();
   }catch(e){
-    el('briefBody').textContent = 'Could not load today\'s brief — '+(e.message||'unknown error')+'. Pull to refresh in a moment.';
-    el('domBody').textContent = 'Unavailable right now.';
-    loadDemo();
+    var cached=loadCache(ME&&ME.prof.major);
+    if(cached){ DATA=cached.data; paint(cached.ts); }
+    var msg=e.message||'Unknown error';
+    if(/limit/i.test(msg)){
+      showToast('Refresh limit reached','Try again in a few hours.');
+    } else {
+      showToast(manual?'Could not refresh':'Failed to load brief', msg);
+    }
+    if(!cached){
+      el('briefBody').textContent='Could not load — '+msg;
+      el('domBody').textContent='Unavailable right now.';
+      loadDemo();
+    }
   }
 }
-function paint(){
+function showToast(title,sub){
+  el('toastT').textContent=title; el('toastS').textContent=sub;
+  var t=el('toast'); t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},4000);
+}
+function paint(ts){
   el('briefBody').textContent = DATA.brief || 'Brief unavailable.';
-  el('briefLbl').textContent = 'Today\'s brief · '+fmtTime(new Date());
+  el('briefLbl').textContent = 'Today\'s brief · '+fmtTime(ts?new Date(ts):new Date());
   el('domBody').textContent = DATA.domread || '—';
   renderNews(); renderCards(DATA.cards||[]); buildFeed(DATA.feed||[]);
   if(DATA.signal) renderSignal(DATA.signal);
@@ -686,16 +1045,16 @@ function renderNews(){
     '<div class="n-hero" onclick="this.classList.toggle(\'open\')">'+
     '<img src="'+imgU(0,800)+'" loading="lazy" onerror="this.style.display=\'none\';this.parentNode.querySelector(\'.n-hero-ph\').style.display=\'flex\'"/>'+
     '<div class="n-hero-ph">'+MAJOR.emoji+'</div><div class="n-hero-body">'+
-    '<div><span class="n-src">'+(hero.source||'Silkly')+'</span><span class="n-cat">'+(hero.cat||'')+'</span></div>'+
-    '<div class="n-hl">'+hero.headline+'</div><div class="n-sm">'+(hero.summary||'')+'</div>'+
-    '<div class="n-time">'+(hero.time||'')+'</div></div></div>';
+    '<div><span class="n-src">'+esc(hero.source||'Silkly')+'</span><span class="n-cat">'+esc(hero.cat||'')+'</span></div>'+
+    '<div class="n-hl">'+esc(hero.headline)+'</div><div class="n-sm">'+esc(hero.summary||'')+'</div>'+
+    '<div class="n-time">'+esc(hero.time||'')+'</div></div></div>';
   el('newsList').innerHTML = rest.map(function(n,i){
     return '<div class="ni" onclick="this.classList.toggle(\'open\')">'+
       '<img class="ni-img" src="'+imgU(i+1,400)+'" loading="lazy" onerror="this.style.display=\'none\';this.parentNode.querySelector(\'.ni-ph\').style.display=\'flex\'"/>'+
       '<div class="ni-ph">'+MAJOR.emoji+'</div><div class="ni-body">'+
-      '<div><span class="ni-src">'+(n.source||'Silkly')+'</span><span class="ni-cat">'+(n.cat||'')+'</span></div>'+
-      '<div class="ni-hl">'+n.headline+'</div><div class="ni-sm">'+(n.summary||'')+'</div>'+
-      '<div class="ni-time">'+(n.time||'')+'</div></div></div>';
+      '<div><span class="ni-src">'+esc(n.source||'Silkly')+'</span><span class="ni-cat">'+esc(n.cat||'')+'</span></div>'+
+      '<div class="ni-hl">'+esc(n.headline)+'</div><div class="ni-sm">'+esc(n.summary||'')+'</div>'+
+      '<div class="ni-time">'+esc(n.time||'')+'</div></div></div>';
   }).join('');
 }
 
@@ -706,11 +1065,11 @@ function renderCards(sections){
   el('domGrids').innerHTML = sections.map(function(sec){
     var cards=(sec.items||[]).map(function(it){
       var up=(it.pc||0)>=0;
-      return '<div class="mc"><div class="mc-sym">'+it.s+'<span class="live-pill">AI</span></div>'+
-        '<div class="mc-name">'+(it.n||'')+'</div><div class="mc-price">'+fmtP(it.p||0)+'</div>'+
+      return '<div class="mc"><div class="mc-sym">'+esc(it.s)+'<span class="live-pill">AI</span></div>'+
+        '<div class="mc-name">'+esc(it.n||'')+'</div><div class="mc-price">'+fmtP(it.p||0)+'</div>'+
         '<div class="mc-chg '+(up?'up':'dn')+'">'+(up?'↗':'↘')+' '+(up?'+':'')+(it.pc||0).toFixed(2)+'%</div></div>';
     }).join('');
-    return '<div class="dom-sec">'+(sec.title||'')+'</div><div class="dom-grid">'+cards+'</div>';
+    return '<div class="dom-sec">'+esc(sec.title||'')+'</div><div class="dom-grid">'+cards+'</div>';
   }).join('');
 }
 
@@ -721,9 +1080,9 @@ function buildFeed(items){
     return '<div class="fli" onclick="this.classList.toggle(\'open\')">'+
       '<img class="fli-img" src="'+imgU(i,400)+'" loading="lazy" onerror="this.style.display=\'none\';this.parentNode.querySelector(\'.fli-ph\').style.display=\'flex\'"/>'+
       '<div class="fli-ph">'+MAJOR.emoji+'</div><div class="fli-body"><div class="fli-top">'+
-      '<div class="fli-cat"><span class="fli-dot"></span>'+(s.tag||'News')+'</div><div class="fli-time">'+(s.time||'')+'</div></div>'+
-      '<div class="fli-hl">'+s.headline+'</div><div class="fli-sm">'+(s.summary||'')+'</div>'+
-      '<div class="fli-src">'+(s.source||'Silkly')+'</div></div></div>';
+      '<div class="fli-cat"><span class="fli-dot"></span>'+esc(s.tag||'News')+'</div><div class="fli-time">'+esc(s.time||'')+'</div></div>'+
+      '<div class="fli-hl">'+esc(s.headline)+'</div><div class="fli-sm">'+esc(s.summary||'')+'</div>'+
+      '<div class="fli-src">'+esc(s.source||'Silkly')+'</div></div></div>';
   }).join('');
 }
 
@@ -731,7 +1090,7 @@ function buildFeed(items){
 function renderSignal(j){
   el('ideaT').textContent=j.ideaTitle||''; el('ideaB').textContent=j.ideaBody||'';
   el('radarL').innerHTML=(j.radar||[]).map(function(s,i){
-    return '<div style="display:flex;gap:8px;margin-bottom:'+(i<2?'9px':'0')+'"><span style="color:var(--accent);font-size:10px;font-weight:800;margin-top:2px">'+(i+1)+'</span><span style="font-size:13px;color:var(--sub);line-height:1.55">'+s+'</span></div>';
+    return '<div style="display:flex;gap:8px;margin-bottom:'+(i<2?'9px':'0')+'"><span style="color:var(--accent);font-size:10px;font-weight:800;margin-top:2px">'+(i+1)+'</span><span style="font-size:13px;color:var(--sub);line-height:1.55">'+esc(s)+'</span></div>';
   }).join('');
   el('moveT').textContent=j.moveTitle||''; el('moveB').textContent=j.moveBody||'';
   el('wordBig').textContent=j.word||''; el('wordDef').textContent=j.wordDef||'';
@@ -754,15 +1113,18 @@ function loadRems(){ try{var r=JSON.parse(localStorage.getItem('rems'));if(r&&r.
   {id:2,title:'Plan the day',time:'09:30',cat:'Plan',done:false}
 ]; }
 function saveRems(){ try{localStorage.setItem('rems',JSON.stringify(REMS));}catch(e){} }
+function saveInterests(arr){ try{localStorage.setItem('silkly_interests_'+(ME&&ME.id||''),JSON.stringify(arr));}catch(e){} }
+function loadInterests(){ try{var r=JSON.parse(localStorage.getItem('silkly_interests_'+(ME&&ME.id||'')));if(r&&r.length)return r;}catch(e){} return []; }
 function renderRems(){
   var s=[].concat(REMS).sort(function(a,b){return a.time.localeCompare(b.time);});
   el('remList').innerHTML=s.map(function(r){
     return '<div class="ri"><div class="ri-chk'+(r.done?' done':'')+'" data-tog="'+r.id+'">'+(r.done?'✓':'')+'</div>'+
-      '<div class="ri-info"><div class="ri-t'+(r.done?' done':'')+'">'+r.title+'</div><div class="ri-s">'+r.time+'</div></div>'+
+      '<div class="ri-info"><div class="ri-t'+(r.done?' done':'')+'">'+esc(r.title)+'</div><div class="ri-s">'+esc(r.time)+'</div></div>'+
       '<span class="ri-cat">'+r.cat+'</span><button class="ri-del" data-del="'+r.id+'">✕</button></div>';
   }).join('');
   Array.prototype.forEach.call(el('remList').querySelectorAll('[data-tog]'),function(n){n.onclick=function(){togR(+n.getAttribute('data-tog'));};});
   Array.prototype.forEach.call(el('remList').querySelectorAll('[data-del]'),function(n){n.onclick=function(){delR(+n.getAttribute('data-del'));};});
+  updateNextUp();
 }
 function togR(id){var r=REMS.filter(function(x){return x.id===id;})[0];if(r){r.done=!r.done;saveRems();renderRems();}}
 function delR(id){REMS=REMS.filter(function(x){return x.id!==id;});saveRems();renderRems();}
@@ -774,10 +1136,11 @@ el('addRemBtn').onclick=function(){
 function schedRem(r){
   var n=new Date(),p=r.time.split(':');
   var fire=new Date(n.getFullYear(),n.getMonth(),n.getDate(),+p[0],+p[1],0), ms=fire-n;
-  if(ms>0&&ms<86400000){ setTimeout(function(){
-    el('toastT').textContent=r.title; el('toastS').textContent=r.time+' reminder';
-    var t=el('toast'); t.classList.add('show'); setTimeout(function(){t.classList.remove('show');},5000);
-  },ms); }
+  if(ms>0&&ms<86400000){
+    var warn=ms-5*60*1000;
+    if(warn>0) setTimeout(function(){ showToast('Coming up: '+r.title,'In 5 minutes · '+r.time); },warn);
+    setTimeout(function(){ showToast(r.title, r.time+' reminder'); },ms);
+  }
 }
 
 /* ============================================================
@@ -793,7 +1156,7 @@ el('ttsBtn').onclick=function(){
 el('refBtn').onclick=function(){
   el('briefBody').innerHTML='<div class="shim" style="width:90%"></div><div class="shim" style="width:70%"></div>';
   el('domBody').innerHTML='<div class="shim" style="width:95%"></div><div class="shim" style="width:80%"></div>';
-  loadAI();
+  loadAI(true);
 };
 
 /* ============================================================
@@ -840,4 +1203,11 @@ el('logoutBtn').onclick=async function(){
 /* ── misc ── */
 function friendly(m){
   m=(m||'').toLowerCase();
-  if(m.indexOf('invalid login')>-1) return 'Email or password is incor
+  if(m.indexOf('invalid login')>-1) return 'Email or password is incorrect.';
+  if(m.indexOf('email not confirmed')>-1) return 'This account isn\'t active yet — contact your admin.';
+  return m.charAt(0).toUpperCase()+m.slice(1);
+}
+})();
+</script>
+</body>
+</html>
